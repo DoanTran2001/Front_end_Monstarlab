@@ -1,0 +1,19 @@
+header.header 
+  img.header-shapes(srcSet="./images/Shapes.png 2x", alt="shapes")
+  a.header-scroll(href="#services")
+    .header-scroll-inner
+      img(src="./images/icon_arrow-down.svg", alt="scroll")
+  nav.header-nav 
+    .container.header-nav-container 
+      a.header-logo(href="/")
+        img(srcSet="./images/logo.png 2x", alt="Pollock Logo")
+        span Pollock
+      ul.header-menu 
+        each val in [{href: "/", title: "Home"}, {href: "/services", title: "Services"}, {href: "/about", title: "About"}, {href: "/pages", title: "Pages"}, {href: "/blog", title: "Blog"}, {href: "/contact", title: "Contact"}]
+          li.header-menu-item 
+            a.header-menu-link(href=val.href)= val.title 
+      .header-tools
+        img(src="./images/Search.svg", alt="Search")
+        img(src="./images/Bag 2.svg", alt="Bag")
+        button.header-button Sign up
+  include ./hero
