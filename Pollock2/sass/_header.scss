@@ -35,6 +35,13 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    text-decoration: none;
+    font-family: $secondary-font;
+    span {
+      color: $text-heading;
+      font-weight: 600;
+      font-size: 24px;
+    }
   }
   &-menu {
     display: flex;
@@ -50,6 +57,7 @@
     font-size: 15px;
     font-weight: 500;
     font-family: $secondary-font;
+    transition: all 0.25s ease-in-out;
     &:hover {
       color: $text-heading;
     }
@@ -60,10 +68,19 @@
     gap: 20px;
   }
   &-button {
+    all: unset;
+    cursor: pointer;
+    background-color: $primary-color;
+    font-weight: 500;
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 5px;
+    text-transform: uppercase;
     padding: 0 38.5px;
     height: 48px;
   }
 }
+
 @keyframes bounced {
   from {
     transform: translateY(-10px);
