@@ -1,0 +1,17 @@
+.logos {
+  text-align: center;
+  max-width: 915px;
+  margin: 0px auto 120px;
+  &-heading {
+    color: black;
+    margin-bottom: 80px;
+    font-size: 36px;
+    line-height: calc(46 / 36);
+  }
+  &-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+}

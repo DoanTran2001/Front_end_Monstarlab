@@ -1,0 +1,10 @@
+include ./mixins.pug
+section.services#services
+  .container 
+    h2.services-heading.heading We design engaging digital products used by millions of people
+    p.services-desc We team up with marketing departments of large companies and startups to deliver award‑winning websites
+    ul.services-list 
+      +serviceItem("./images/Rocket.svg", "Rocket", "Branding", "We design digital platforms to empower users and your brand's tribe.")
+      +serviceItem("./images/Layers.svg", "Development", "Development", "We design digital platforms to empower users and your brand's tribe.")
+      +serviceItem("./images/Chart.svg", "Strategy", "Strategy", "We design digital platforms to empower users and your brand's tribe.")
+    button.button.services-button View Our Services

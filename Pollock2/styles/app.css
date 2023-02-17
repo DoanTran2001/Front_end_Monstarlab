@@ -22,9 +22,20 @@ body {
   min-height: 100vh;
 }
 
+ul {
+  list-style: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "DM Sans", sans-serif;
   font-size: 16px;
+  color: #7b88a8;
+  line-height: 1;
+  background-color: #fff;
 }
 
 .wrapper {
@@ -36,6 +47,22 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
+}
+
+.button {
+  all: unset;
+  color: white;
+  border-radius: 5px;
+  background-color: #4f77ff;
+  cursor: pointer;
+  font-family: "Outfit";
+  font-weight: 500;
+}
+
+.heading {
+  color: #2d3958;
+  font-weight: 500;
+  font-family: "Outfit";
 }
 
 .header {
@@ -76,6 +103,13 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
+  font-family: "Outfit";
+}
+.header-logo span {
+  color: #2d3958;
+  font-weight: 600;
+  font-size: 24px;
 }
 .header-menu {
   display: flex;
@@ -91,6 +125,7 @@ body {
   font-size: 15px;
   font-weight: 500;
   font-family: "Outfit";
+  transition: all 0.25s ease-in-out;
 }
 .header-menu-link:hover {
   color: #2d3958;
@@ -101,6 +136,14 @@ body {
   gap: 20px;
 }
 .header-button {
+  all: unset;
+  cursor: pointer;
+  background-color: #4f77ff;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  border-radius: 5px;
+  text-transform: uppercase;
   padding: 0 38.5px;
   height: 48px;
 }
@@ -157,6 +200,10 @@ body {
 }
 .hero-heading {
   margin-bottom: 40px;
+  font-weight: 500;
+  font-family: "Outfit";
+  font-size: 72px;
+  line-height: 1.0833333333;
 }
 .hero-heading span {
   background-image: linear-gradient(91.79deg, #857fff 32.21%, #ffc0ec 83.79%);
@@ -174,6 +221,7 @@ body {
 }
 .hero-started {
   padding: 16px 32px;
+  text-transform: uppercase;
 }
 .hero-play {
   display: flex;
@@ -214,6 +262,156 @@ body {
     width: 40px;
     height: 40px;
   }
+}
+.services {
+  margin-top: 150px;
+  margin-bottom: 120px;
+  text-align: center;
+}
+.services-heading {
+  font-size: 64px;
+  line-height: 1.125;
+  max-width: 970px;
+  margin: 0 auto 30px;
+  letter-spacing: -2px;
+}
+.services-desc {
+  font-weight: 400;
+  font-size: 18px;
+  color: #7B88A8;
+  line-height: 1.5555555556;
+  margin-bottom: 80px;
+  letter-spacing: -0.3px;
+}
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-gap: 30px;
+  margin-bottom: 70px;
+}
+.services-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  background: #FFFFFF;
+  border: 1px solid rgba(97, 119, 152, 0.2);
+  transition: all 0.25s ease-in-out;
+  padding: 50px 35px 60px;
+}
+.services-item:hover {
+  box-shadow: 0px 20px 50px rgba(79, 119, 255, 0.2);
+}
+.services-title {
+  margin: 22px 0 40px;
+  font-size: 22px;
+  color: #120F1F;
+  font-weight: 400;
+  font-family: "Outfit";
+}
+.services-content {
+  font-size: 16px;
+  color: #7B88A8;
+}
+.services-button {
+  padding: 0 32px;
+  height: 60px;
+}
+
+.logos {
+  text-align: center;
+  max-width: 915px;
+  margin: 0px auto 120px;
+}
+.logos-heading {
+  color: black;
+  margin-bottom: 80px;
+  font-size: 36px;
+  line-height: 1.2777777778;
+}
+.logos-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.about {
+  background-color: #f7f5f1;
+  padding: 120px 0;
+}
+.about-heading {
+  font-family: "Outfit";
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1.1666666667;
+  color: #2d3958;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.about-caption {
+  font-size: 18px;
+  color: #7b88a8;
+  text-align: center;
+  margin-bottom: 120px;
+}
+.about-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 150px;
+}
+.about-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.about-section:nth-child(even) {
+  flex-direction: row-reverse;
+}
+.about-section-heading {
+  font-family: "Outfit";
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 1.2777777778;
+  color: #2d3958;
+  margin-bottom: 30px;
+}
+.about-section-text {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: #788190;
+  letter-spacing: -0.3px;
+  margin-bottom: 50px;
+}
+.about-section-items {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 469px;
+}
+.about-section-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+}
+.about-section-item-content h4 {
+  font-family: "Outfit";
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.4px;
+  color: #2d3958;
+  margin-bottom: 10px;
+}
+.about-section-item-content p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #7B88A8;
+}
+.about-content {
+  width: 100%;
+  max-width: 570px;
 }
 
 /*# sourceMappingURL=app.css.map */
