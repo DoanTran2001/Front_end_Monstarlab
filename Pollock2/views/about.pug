@@ -1,0 +1,19 @@
+section.about
+  .container
+    h2.heading.about-heading Digital products that people love to use
+    p.about-caption Applying behavioral science to customer experience
+    .about-sections 
+      each item in [1, 2, 3]
+        .about-section 
+          .about-image
+            img(srcSet="./images/About-Section1.png 2x", alt="About-Section1")
+          .about-content 
+            h3.about-section-heading Web3 Experience Design
+            p.about-section-text In the new digital era, users are in control of content and community, and experience design is essential.
+            ul.about-section-items 
+              each item in ["Design & Development Systems", "Digital Growth Strategy", "User Journey Mapping"]
+                li.about-section-item 
+                  img(src="./images/About-Icon.svg", alt="")
+                  .about-section-item-content 
+                    h4= item
+                    p Chat, start meetings or join them with a click from within your conversation.
