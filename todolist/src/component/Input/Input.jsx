@@ -1,24 +1,31 @@
 import { TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo, finishEditTodo } from '../../redux/todoSlice'
 
-function Input({ addTodo, currentTodo, finishTodo, editTodo }) {
+function Input({currentTodo}) {
   const [name, setName] = useState("");
-  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setName(currentTodo?.name || '')
+  }, [currentTodo])
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (currentTodo) {
-      finishTodo();
+      dispatch(finishEditTodo({
+        id: currentTodo.id,
+        name,
+        done: currentTodo.done
+      }))
     } else {
-      addTodo(name);
+      dispatch(addTodo(name))
     }
     setName("");
   };
   const handleChangeValue = (e) => {
-    if (currentTodo) {
-      editTodo(e.target.value);
-    } else {
-      setName(e.target.value);
-    }
+    setName(e.target.value)
   };
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
@@ -48,7 +55,7 @@ function Input({ addTodo, currentTodo, finishTodo, editTodo }) {
         size="medium"
         variant="outlined"
         fullWidth
-        value={currentTodo ? currentTodo.name : name}
+        value={name}
         onChange={handleChangeValue}
       />
     </form>

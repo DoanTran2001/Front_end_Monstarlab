@@ -1,91 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box, Container, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { v4 as uuidv4 } from "uuid";
 import Input from "../Input/Input";
 import ListTask from "../ListTask/ListTask";
+import { useSelector } from "react-redux";
 
 function TodoList() {
   const classes = useStyles();
-  const [todos, setTodos] = useState([]);
-  const [currentTodo, setCurrentTodo] = useState(null);
+  const todos = useSelector((state) => state.todo.todos);
+  console.log("TodoList ~ todos:", todos)
+  const currentTodo = useSelector((state) => state.todo.currentTodo);
+  const doneTodo = todos.filter((todo) => todo.done === true)
+  const notDoneTodo = todos.filter((todo) => todo.done === false)
+  // console.log("TodoList ~ doneTodo:", doneTodo)
+  
 
-  useEffect(() => {
-    const todosString = localStorage.getItem("todo");
-    // console.log(todosString);
-    const todoList = JSON.parse(todosString || "[]");
-    // console.log(todoList);
-    setTodos(todoList);
-  }, []);
-
-  const addTodo = (name) => {
-    if (name.trim() === "") {
-      return;
-    }
-    const todo = {
-      name,
-      id: uuidv4(),
-    };
-    setTodos((prev) => [...prev, todo]);
-    const todosString = localStorage.getItem("todo");
-    const todoList = JSON.parse(todosString || "[]");
-    const newTodos = [...todoList, todo];
-    localStorage.setItem("todo", JSON.stringify(newTodos));
-  };
-
-  const startEditTodo = (id) => {
-    const findTodo = todos.find((todo) => todo.id === id);
-    if (findTodo) {
-      setCurrentTodo(findTodo);
-    }
-  };
-  // Change edit todo
-  const editTodo = (name) => {
-    setCurrentTodo((prev) => ({ ...prev, name }));
-  };
-  // submit todo input
-  const finishTodo = () => {
-    const result = todos.map((todo) => {
-      if (todo.id === currentTodo.id) {
-        return currentTodo;
-      }
-      return todo;
-    });
-    setTodos(result);
-    const newTodos = [...result];
-    localStorage.setItem("todo", JSON.stringify(newTodos));
-    setCurrentTodo(null);
-  };
-  // Delete a todo
-  const deleteTodo = (id) => {
-    const findIndexTodo = todos.findIndex((todo) => todo.id === id);
-    if (findIndexTodo !== -1) {
-      const results = [...todos];
-      results.splice(findIndexTodo, 1);
-      setTodos(results);
-      const newTodos = [...results];
-      localStorage.setItem("todo", JSON.stringify(newTodos));
-    }
-  };
   return (
     <Container maxWidth="md">
       <Box className={classes.boxContainer}>
         <Typography variant="h1" className={classes.textHeading}>
           TodoList
         </Typography>
-        <Input
-          addTodo={addTodo}
-          editTodo={editTodo}
-          currentTodo={currentTodo}
-          finishTodo={finishTodo}
-        />
-        <ListTask
-          todos={todos}
-          deleteTodo={deleteTodo}
-          startEditTodo={startEditTodo}
-          currentTodo={currentTodo}
-          setCurrentTodo={setCurrentTodo}
-        />
+        <Input currentTodo={currentTodo} />
+        <ListTask todos={notDoneTodo} />
+        <ListTask todos={doneTodo} doneTodo/>
       </Box>
     </Container>
   );
