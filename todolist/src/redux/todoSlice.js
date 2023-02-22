@@ -14,6 +14,8 @@ const todoSlice = createSlice({
         name: action.payload,
         id: uuidv4(),
         done: false,
+        createdAt: (new Date()).toISOString(),
+        important: false
       };
       state.todos.push(todo);
     },
@@ -33,6 +35,26 @@ const todoSlice = createSlice({
     },
     setCurrentTodo: (state, action) => {
       state.currentTodo = action.payload;
+    },
+    setImportantTodo: (state, action) => {
+      const todoId = action.payload;
+      state.todos.some((todo, index) => {
+        if(todo.id === todoId) {
+          state.todos[index].important = !state.todos[index].important;
+          return true;
+        }
+        return false;
+      })
+    },
+    addImportTodo: (state, action) => {
+      const todo = {
+        name: action.payload,
+        id: uuidv4(),
+        done: false,
+        createdAt: (new Date()).toISOString(),
+        important: true
+      };
+      state.todos.push(todo);
     },
     finishEditTodo: (state, action) => {
       const todoId = action.payload.id;
@@ -68,5 +90,6 @@ export const {
   finishEditTodo,
   setCurrentTodo,
   toggleDoneTodo,
+  setImportantTodo
 } = todoSlice.actions;
 export default todoSlice.reducer;

@@ -9,12 +9,15 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
-import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
+import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 import ConfirmBox from "../ConfirmBox/ConfirmBox";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteTodo,
   setCurrentTodo,
+  setImportantTodo,
   startEditTodo,
   toggleDoneTodo,
 } from "../../redux/todoSlice";
@@ -41,12 +44,22 @@ function ListTask({ todos, doneTodo }) {
   };
   return (
     <List>
-      <Typography variant="h6" sx={{color: 'blue'}}>{doneTodo ? "Hoàn thành" : "Chưa hoàn thành"}</Typography>
+      <Typography variant="h6" sx={{ color: "blue" }}>
+        {doneTodo ? "Hoàn thành" : "Chưa hoàn thành"}
+      </Typography>
       {todos.length > 0 &&
         todos.map((todo) => (
           <ListItemText key={todo.id}>
             <Stack direction="row">
               <ListItemText primary={todo.name} />
+
+              <ListItemIcon
+                sx={{ cursor: "pointer" }}
+                onClick={() => dispatch(setImportantTodo(todo.id))}
+              >
+                {todo.important ? <StarIcon /> : <StarBorderIcon />}
+              </ListItemIcon>
+
               <ListItemIcon
                 onClick={() => handleDelete(todo)}
                 sx={{ cursor: "pointer" }}
@@ -60,7 +73,11 @@ function ListTask({ todos, doneTodo }) {
               >
                 <EditIcon />
               </ListItemIcon>
-              <ListItemIcon title={doneTodo ? 'Chưa hoàn thành' : 'Hoàn thành'} sx={{ cursor: "pointer" }} onClick={() => dispatch(toggleDoneTodo(todo))}>
+              <ListItemIcon
+                title={doneTodo ? "Chưa hoàn thành" : "Hoàn thành"}
+                sx={{ cursor: "pointer" }}
+                onClick={() => dispatch(toggleDoneTodo(todo))}
+              >
                 {doneTodo ? <DoNotDisturbIcon /> : <CheckIcon />}
               </ListItemIcon>
             </Stack>

@@ -1,31 +1,38 @@
 import React from "react";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Input from "../Input/Input";
 import ListTask from "../ListTask/ListTask";
 import { useSelector } from "react-redux";
 
-function TodoList() {
+function TodoList({ title, todoList }) {
   const classes = useStyles();
-  const todos = useSelector((state) => state.todo.todos);
-  console.log("TodoList ~ todos:", todos)
+  const a = useSelector((state) => state.todo.todos);
+  const settingImage = useSelector((state) => state.setting.image)
+  const todos = todoList ? todoList : a;
   const currentTodo = useSelector((state) => state.todo.currentTodo);
-  const doneTodo = todos.filter((todo) => todo.done === true)
-  const notDoneTodo = todos.filter((todo) => todo.done === false)
-  // console.log("TodoList ~ doneTodo:", doneTodo)
-  
+  const doneTodo = todos.filter((todo) => todo.done === true);
+  const notDoneTodo = todos.filter((todo) => todo.done === false);
 
   return (
-    <Container maxWidth="md">
-      <Box className={classes.boxContainer}>
-        <Typography variant="h1" className={classes.textHeading}>
-          TodoList
-        </Typography>
-        <Input currentTodo={currentTodo} />
-        <ListTask todos={notDoneTodo} />
-        <ListTask todos={doneTodo} doneTodo/>
-      </Box>
-    </Container>
+    <Box className={classes.boxContainer} sx={{
+      backgroundImage: `url(${settingImage})`
+    }}>
+      <Typography variant="h1" className={classes.textHeading}>
+        {title || "TodoList"}
+      </Typography>
+      <Input currentTodo={currentTodo} />
+      {title ? (
+        <>
+          <ListTask todos={todos} />
+        </>
+      ) : (
+        <>
+          <ListTask todos={notDoneTodo} />
+          <ListTask todos={doneTodo} doneTodo />
+        </>
+      )}
+    </Box>
   );
 }
 const useStyles = makeStyles({
@@ -33,6 +40,11 @@ const useStyles = makeStyles({
     border: "1px solid #eee",
     padding: "15px 20px",
     borderRadius: "15px",
+    width: "60%",
+    
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+    backgroundSize: 'cover'
   },
   textHeading: {
     fontSize: "45px",
