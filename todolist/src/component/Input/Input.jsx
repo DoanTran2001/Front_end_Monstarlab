@@ -17,7 +17,9 @@ function Input({currentTodo}) {
       dispatch(finishEditTodo({
         id: currentTodo.id,
         name,
-        done: currentTodo.done
+        done: currentTodo.done,
+        createdAt: currentTodo.createdAt,
+        important: currentTodo.important
       }))
     } else {
       dispatch(addTodo(name))

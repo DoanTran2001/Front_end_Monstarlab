@@ -24,7 +24,6 @@ import {
 
 function ListTask({ todos, doneTodo }) {
   const [open, setOpen] = useState(false);
-  // const todos = useSelector((state) => state.todo.todos);
   const currentTodo = useSelector((state) => state.todo.currentTodo);
   const dispatch = useDispatch();
 
@@ -37,11 +36,13 @@ function ListTask({ todos, doneTodo }) {
     dispatch(setCurrentTodo(null));
     setOpen(false);
   };
+
   const handleConfirm = (id) => {
     dispatch(deleteTodo(id));
     dispatch(setCurrentTodo(null));
     setOpen(false);
   };
+  
   return (
     <List>
       <Typography variant="h6" sx={{ color: "blue" }}>

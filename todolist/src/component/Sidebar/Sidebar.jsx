@@ -5,13 +5,21 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  TextField,
 } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchValue } from "../../redux/todoSlice";
 
 function Sidebar() {
   const theme = useSelector((state) => state.setting.theme);
+  const dispatch = useDispatch()
+  const [search, setSearch] = useState("");
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+    dispatch(setSearchValue(e.target.value))
+  };
   return (
     <Box
       sx={{
@@ -28,6 +36,7 @@ function Sidebar() {
       }}
     >
       <List>
+        <TextField value={search} onChange={handleChange} placeholder="Search todo"/>
         <ListItem>
           <ListItemButton component={NavLink} to="/">
             <ListItemText primary="Home" />

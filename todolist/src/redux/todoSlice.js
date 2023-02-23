@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 const initialState = {
   todos: [],
   currentTodo: null,
+  searchValue: "",
 };
 const todoSlice = createSlice({
   name: "todo",
@@ -14,18 +15,14 @@ const todoSlice = createSlice({
         name: action.payload,
         id: uuidv4(),
         done: false,
-        createdAt: (new Date()).toISOString(),
-        important: false
+        createdAt: new Date().toISOString(),
+        important: false,
       };
       state.todos.push(todo);
     },
     deleteTodo: (state, action) => {
-      const findIndexTodo = state.todos.findIndex(
-        (todo) => todo.id === action.payload
-      );
-      if (findIndexTodo !== -1) {
-        state.todos.splice(findIndexTodo, 1);
-      }
+      const newTodos = state.todos.filter((item) => item.id !== action.payload);
+      state.todos = newTodos
     },
     startEditTodo: (state, action) => {
       const findTodo = state.todos.find((todo) => todo.id === action.payload);
@@ -39,20 +36,23 @@ const todoSlice = createSlice({
     setImportantTodo: (state, action) => {
       const todoId = action.payload;
       state.todos.some((todo, index) => {
-        if(todo.id === todoId) {
+        if (todo.id === todoId) {
           state.todos[index].important = !state.todos[index].important;
           return true;
         }
         return false;
-      })
+      });
+    },
+    setSearchValue: (state, action) => {
+      state.searchValue = action.payload;
     },
     addImportTodo: (state, action) => {
       const todo = {
         name: action.payload,
         id: uuidv4(),
         done: false,
-        createdAt: (new Date()).toISOString(),
-        important: true
+        createdAt: new Date().toISOString(),
+        important: true,
       };
       state.todos.push(todo);
     },
@@ -90,6 +90,7 @@ export const {
   finishEditTodo,
   setCurrentTodo,
   toggleDoneTodo,
-  setImportantTodo
+  setImportantTodo,
+  setSearchValue,
 } = todoSlice.actions;
 export default todoSlice.reducer;
