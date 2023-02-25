@@ -35,18 +35,16 @@ const todoSlice = createSlice({
     },
     setImportantTodo: (state, action) => {
       const todoId = action.payload;
-      state.todos.some((todo, index) => {
-        if (todo.id === todoId) {
+      state.todos.forEach((todo, index) => {
+        if(todo.id === todoId) {
           state.todos[index].important = !state.todos[index].important;
-          return true;
         }
-        return false;
-      });
+      })
     },
     setSearchValue: (state, action) => {
       state.searchValue = action.payload;
     },
-    addImportTodo: (state, action) => {
+    addImportantTodo: (state, action) => {
       const todo = {
         name: action.payload,
         id: uuidv4(),
@@ -69,17 +67,15 @@ const todoSlice = createSlice({
     },
     toggleDoneTodo: (state, action) => {
       const todoId = action.payload.id;
-      state.todos.some((todo, index) => {
+      state.todos.forEach((todo, index) => {
         if (todo.id === todoId) {
           let status = !state.todos[index].done;
           state.todos[index].done = status;
           if (state.currentTodo !== null) {
             state.currentTodo.done = status;
           }
-          return true;
         }
-        return false;
-      });
+      })
     },
   },
 });

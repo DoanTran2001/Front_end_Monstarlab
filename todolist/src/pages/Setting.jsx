@@ -21,7 +21,7 @@ function Setting() {
     <Box
       sx={{
         border: "1px solid #eee",
-        borderRadius: "20px",
+        borderRadius: 20,
       }}
     >
       <form action="">

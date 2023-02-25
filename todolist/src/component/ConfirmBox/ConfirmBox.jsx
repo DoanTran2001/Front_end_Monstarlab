@@ -1,9 +1,7 @@
 import React from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
-function ConfirmBox(props) {
-  const { open, onClose, onConfirm, title, content } = props;
-
+const ConfirmBox = ({ open, onClose, onConfirm, title, content }) => {
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>{title}</DialogTitle>
