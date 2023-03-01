@@ -1,14 +1,16 @@
-import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
-import RemoveIcon from "@mui/icons-material/Remove";
-import AddIcon from "@mui/icons-material/Add";
 import { formatPrice } from "../../utils/utils";
-import { deleteAProduct, updateAProduct } from "../../redux/cartSlice";
+import { deleteAProduct } from "../../redux/cartSlice";
+import CustomQuantityCell from "../../components/CustomQuantityCell/CustomQuantityCell";
 
 function Cart() {
   const [selectedIds, setSelectedIds] = useState([]);
+  const cart = useSelector((state) => state.cart.cart);
+  const dispatch = useDispatch();
+  const cartArr = Object.values(cart);
   const columns = [
     { field: "id", headerName: "ID", width: 100 },
     { field: "info", headerName: "Sản phẩm", width: 400 },
@@ -17,42 +19,43 @@ function Cart() {
       field: "quantity",
       headerName: "Số lượng",
       renderCell: (params) => {
+        return <CustomQuantityCell params={params} />;
         // eslint-disable-next-line react-hooks/rules-of-hooks
-        const [quantity, setQuantity] = useState(params.value);
-        const handleIncrement = () => {
-          setQuantity((prevQuantity) => prevQuantity + 1);
-          dispatch(
-            updateAProduct({
-              id: params.row.id,
-              count: quantity + 1,
-            })
-          );
-        };
-        const handleDecrement = () => {
-          setQuantity((prevQuantity) => prevQuantity - 1);
-          dispatch(
-            updateAProduct({
-              id: params.row.id,
-              count: quantity - 1,
-            })
-          );
-        };
+        // const [quantity, setQuantity] = useState(params.value);
+        // const handleIncrement = () => {
+        //   setQuantity((prevQuantity) => prevQuantity + 1);
+        //   dispatch(
+        //     updateAProduct({
+        //       id: params.row.id,
+        //       count: quantity + 1,
+        //     })
+        //   );
+        // };
+        // const handleDecrement = () => {
+        //   setQuantity((prevQuantity) => prevQuantity - 1);
+        //   dispatch(
+        //     updateAProduct({
+        //       id: params.row.id,
+        //       count: quantity - 1,
+        //     })
+        //   );
+        // };
 
-        return (
-          <Box>
-            <IconButton
-              aria-label="reduce"
-              onClick={handleDecrement}
-              disabled={quantity === 0}
-            >
-              <RemoveIcon />
-            </IconButton>
-            {quantity}
-            <IconButton aria-label="increase" onClick={handleIncrement}>
-              <AddIcon />
-            </IconButton>
-          </Box>
-        );
+        // return (
+        //   <Box>
+        //     <IconButton
+        //       aria-label="reduce"
+        //       onClick={handleDecrement}
+        //       disabled={quantity === 0}
+        //     >
+        //       <RemoveIcon />
+        //     </IconButton>
+        //     {quantity}
+        //     <IconButton aria-label="increase" onClick={handleIncrement}>
+        //       <AddIcon />
+        //     </IconButton>
+        //   </Box>
+        // );
       },
     },
     { field: "total", headerName: "Thành tiền", width: 120 },
@@ -64,9 +67,7 @@ function Cart() {
       ),
     },
   ];
-  const cart = useSelector((state) => state.cart.cart);
-  const dispatch = useDispatch();
-  const cartArr = Object.values(cart);
+
   const rows = cartArr.map((item) => {
     return {
       id: item.id,
@@ -96,6 +97,7 @@ function Cart() {
         rows={rows}
         columns={columns}
         checkboxSelection
+        
         onSelectionModelChange={(ids) => {
           setSelectedIds(ids);
         }}
@@ -108,7 +110,6 @@ function Cart() {
         </Typography>
         <Stack direction={"row"}>
           <Typography>Thành tiền: {formatPrice(totalPrice)}</Typography>
-          <Typography></Typography>
         </Stack>
       </Box>
     </Box>

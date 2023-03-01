@@ -13,6 +13,7 @@ import { addToCart } from "../../redux/cartSlice";
 import products from "../../utils/data";
 import { formatPrice } from "../../utils/utils";
 import useStyles from "./style";
+import './style.scss'
 
 function ProductDetail() {
   const classes = useStyles();
@@ -80,7 +81,7 @@ function ProductDetail() {
           </Button>
         </Box>
       </Stack>
-      <div
+      <div className="dangerous"
         dangerouslySetInnerHTML={{
           __html: product.description,
         }}

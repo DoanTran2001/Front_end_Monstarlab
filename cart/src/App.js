@@ -1,8 +1,6 @@
 import { Container } from "@mui/material";
 import "./App.css";
 import Header from "./components/Header/Header";
-import ProductList from "./components/ProductList/ProductList";
-import products from "./utils/data";
 import { Route, Routes } from "react-router-dom";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Cart from "./pages/Cart/Cart";
